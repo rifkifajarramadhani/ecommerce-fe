@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -18,23 +17,26 @@ import { navs } from "@/lib/dummy/nav";
 import { Nav } from "@/lib/types/nav";
 
 export const MobileMegaMenuButton = () => {
-  const navMenus: Nav[] = navs;
   const [open, setOpen] = useState(false);
-  const [level, setLevel] = useState<number>(0);
-  const [currentNavs, setCurrentNavs] = useState<Nav[] | null>(navMenus);
-  const [previousNavs, setPreviousNavs] = useState<Nav[] | null>(navMenus);
+  const [navigationStack, setNavigationStack] = useState<Nav[][]>([navs]);
+  const [currentLevel, setCurrentLevel] = useState(0);
 
-  const openNavigations = (currNavs: Nav[] | null, prevNavs: Nav[] | null) => {
-    setCurrentNavs(currNavs);
-    setPreviousNavs(prevNavs);
+  const currentNavs = navigationStack[currentLevel];
+
+  const navigateForward = (nav: Nav) => {
+    if (nav.children) {
+      setNavigationStack([
+        ...navigationStack.slice(0, currentLevel + 1),
+        nav.children,
+      ]);
+      setCurrentLevel(currentLevel + 1);
+    }
   };
 
-  const handleSetLevel = (action: string) => {
-    if (level == 0 && action == "back") {
-      return;
+  const navigateBack = () => {
+    if (currentLevel > 0) {
+      setCurrentLevel(currentLevel - 1);
     }
-
-    action == "next" ? setLevel(level + 1) : setLevel(level - 1);
   };
 
   return (
@@ -53,7 +55,6 @@ export const MobileMegaMenuButton = () => {
               alt="logo"
             />
           </picture>
-
           <div className="flex items-center">
             <AuthButton className="text-black" />
             <CartButton className="text-black" />
@@ -66,36 +67,33 @@ export const MobileMegaMenuButton = () => {
         </DrawerHeader>
         <div className="flex flex-row justify-between items-center">
           <p>Hi Lorem</p>
-
           <p>SmartBuy Points 500</p>
         </div>
         <DrawerDescription className="flex flex-row justify-between items-center">
           <Input />
         </DrawerDescription>
         <DrawerDescription className="flex flex-col justify-between items-center">
-          {level > 0 && (
+          {currentLevel > 0 && (
             <Button
               variant="ghost"
               className="w-full btn-hover-light text-left py-6 uppercase border-b border-gray-200 text-xl"
-              key={"back"}
-              onClick={() => {
-                openNavigations(previousNavs, previousNavs);
-                handleSetLevel("back");
-              }}
+              onClick={navigateBack}
             >
               <ChevronLeft />
               Back
             </Button>
           )}
-          {level <= 0 ? (
+          {currentLevel === 0 ? (
             <Button
               variant="ghost"
               className="w-full btn-hover-light text-left py-6 uppercase border-b border-gray-200 text-xl"
-              key={"departments"}
-              onClick={() => {
-                openNavigations(currentNavs, previousNavs);
-                handleSetLevel("next");
-              }}
+              onClick={() =>
+                navigateForward({
+                  id: "departments",
+                  title: "Departments",
+                  children: navs,
+                })
+              }
             >
               Departments
               <ChevronRight />
@@ -106,10 +104,7 @@ export const MobileMegaMenuButton = () => {
                 variant="ghost"
                 className="w-full btn-hover-light text-left py-6 uppercase border-b border-gray-200 text-xl"
                 key={nav.id}
-                onClick={() => {
-                  openNavigations(nav.children, previousNavs);
-                  handleSetLevel("next");
-                }}
+                onClick={() => navigateForward(nav)}
               >
                 {nav.title}
                 {nav.children && <ChevronRight />}
