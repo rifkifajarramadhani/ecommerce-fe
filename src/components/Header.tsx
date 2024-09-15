@@ -14,9 +14,9 @@ import { MobileMegaMenuButton } from "./buttons/MobileMegaMenuButton";
 
 export const Header = () => {
   return (
-    <header className="w-full h-32 flex items-center bg-black">
+    <header className="w-full h-32 flex items-center bg-[#101010] lg:bg-black">
       {/* MOBILE */}
-      <div className="flex lg:hidden">
+      <div className="w-full flex lg:hidden justify-between items-center px-4">
         {/* BRAND */}
         <picture>
           <img
@@ -26,9 +26,11 @@ export const Header = () => {
         </picture>
 
         {/* BUTTONS */}
-        <AuthButton className="text-white" />
-        <CartButton className="text-white" />
-        <MobileMegaMenuButton />
+        <div>
+          <AuthButton className="text-white" />
+          <CartButton className="text-white" />
+          <MobileMegaMenuButton />
+        </div>
       </div>
 
       {/* DESKTOP */}
