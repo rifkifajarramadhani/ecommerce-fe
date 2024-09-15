@@ -11,6 +11,8 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { MobileMegaMenuButton } from "./buttons/MobileMegaMenuButton";
+import { navs } from "@/lib/dummy/nav";
+import { NavigationMenus } from "./header/NavigationMenus";
 
 export const Header = () => {
   return (
@@ -67,16 +69,7 @@ export const Header = () => {
           </div>
 
           {/* NAV MENUS */}
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <NavigationMenuLink>Link</NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+          <NavigationMenus />
         </div>
       </div>
     </header>
