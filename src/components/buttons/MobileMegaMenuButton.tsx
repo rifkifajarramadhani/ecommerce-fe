@@ -11,7 +11,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
-import { ChevronRight, Menu, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { AuthButton } from "./AuthButton";
 import { CartButton } from "./CartButton";
 import { navs } from "@/lib/dummy/nav";
@@ -20,10 +20,21 @@ import { Nav } from "@/lib/types/nav";
 export const MobileMegaMenuButton = () => {
   const navMenus: Nav[] = navs;
   const [open, setOpen] = useState(false);
-  const [currentNav, setCurrentNav] = useState<Nav[]>(navMenus);
+  const [level, setLevel] = useState<number>(0);
+  const [currentNavs, setCurrentNavs] = useState<Nav[] | null>(navMenus);
+  const [previousNavs, setPreviousNavs] = useState<Nav[] | null>(navMenus);
 
-  const openNavigations = (navs: Nav[]) => {
-    setCurrentNav(navs);
+  const openNavigations = (currNavs: Nav[] | null, prevNavs: Nav[] | null) => {
+    setCurrentNavs(currNavs);
+    setPreviousNavs(prevNavs);
+  };
+
+  const handleSetLevel = (action: string) => {
+    if (level == 0 && action == "back") {
+      return;
+    }
+
+    action == "next" ? setLevel(level + 1) : setLevel(level - 1);
   };
 
   return (
@@ -62,12 +73,49 @@ export const MobileMegaMenuButton = () => {
           <Input />
         </DrawerDescription>
         <DrawerDescription className="flex flex-col justify-between items-center">
-          {currentNav.map((nav) => (
-            <Button key={nav.id} onClick={() => openNavigations(nav.children)}>
-              {nav.title}
-              {nav.children && <ChevronRight />}
+          {level > 0 && (
+            <Button
+              variant="ghost"
+              className="w-full btn-hover-light text-left py-6 uppercase border-b border-gray-200 text-xl"
+              key={"back"}
+              onClick={() => {
+                openNavigations(previousNavs, previousNavs);
+                handleSetLevel("back");
+              }}
+            >
+              <ChevronLeft />
+              Back
             </Button>
-          ))}
+          )}
+          {level <= 0 ? (
+            <Button
+              variant="ghost"
+              className="w-full btn-hover-light text-left py-6 uppercase border-b border-gray-200 text-xl"
+              key={"departments"}
+              onClick={() => {
+                openNavigations(currentNavs, previousNavs);
+                handleSetLevel("next");
+              }}
+            >
+              Departments
+              <ChevronRight />
+            </Button>
+          ) : (
+            currentNavs?.map((nav) => (
+              <Button
+                variant="ghost"
+                className="w-full btn-hover-light text-left py-6 uppercase border-b border-gray-200 text-xl"
+                key={nav.id}
+                onClick={() => {
+                  openNavigations(nav.children, previousNavs);
+                  handleSetLevel("next");
+                }}
+              >
+                {nav.title}
+                {nav.children && <ChevronRight />}
+              </Button>
+            ))
+          )}
         </DrawerDescription>
       </DrawerContent>
     </Drawer>
