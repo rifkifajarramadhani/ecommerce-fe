@@ -1,6 +1,7 @@
-import { Nav } from "../types/nav";
+import { Category } from "../types/Category";
+import { Nav } from "../types/Nav";
 
-export const navs: Nav[] = [
+export const navs: Category[] = [
   {
     id: 31,
     parent_id: null,

@@ -1,0 +1,41 @@
+import { Category } from "./Category";
+import { Asset } from "./Asset";
+import { Brand } from './Brand';
+import { Barcode } from './Barcode';
+
+export interface Product {
+    id: number;
+    last_edit_user_id?: number | null;
+    status: string;
+    not_available_online: boolean;
+    title: string;
+    slug: string;
+    description: string;
+    delivery_text: string;
+    stock_throttle?: number | null;
+    price: number;
+    was_price: number | null;
+    price_text: string;
+    soh: number;
+    soh_reserved: number;
+    code: string;
+    available_stock?: number | null;
+    stock_throttle_modified?: Date | null;
+    stock_throttle_modified_user_id?: number | null;
+    created?: Date | null;
+    modified?: Date | null;
+    deleted?: Date | null;
+    is_in_stock: boolean;
+    can_purchase: boolean;
+    in_store_int?: number | null;
+    categories?: Category[] | null;
+    images?: Asset[] | null;
+    is_on_sale: boolean;
+    primary_image: Asset | null;
+    brand: Brand | null;
+    barcodes: Barcode[] | null;
+    deepest_category: Category | null;
+    default_barcode: Barcode | null;
+    suggested_products: Product[] | null;
+    allergens: string | null;
+}

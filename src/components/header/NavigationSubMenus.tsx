@@ -1,61 +1,95 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Category } from "@/lib/types/Category";
 
-const NavigationSubMenus = () => {
+interface NavigationSubMenusProps {
+  categories: Category[];
+  parentCategory: Category;
+  level: number;
+  parentLeftPosition: string;
+}
+
+export default function NavigationSubMenus(props: NavigationSubMenusProps) {
+  const { categories, parentCategory, level, parentLeftPosition } = props;
+
   const [dropdownStates, setDropdownStates] = useState<Record<string, boolean>>(
     {}
   );
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [parentLeftPosition, setParentLeftPosition] = useState(0);
+  const dropdownRef = useRef(null);
 
-  const toggleDropdown = (category: Nav) => {
+  const toggleDropdown = (category: Category) => {
+    const newSlug = `${parentCategory.slug || ""}/${category.slug}`;
+
     if (!category.children.length) {
-      window.location.href = `/category/${category.slug}`;
+      window.location.href = `/category/${newSlug}`;
       return;
     }
 
-    const isActive = dropdownStates[category.slug];
-    setDropdownStates({});
+    setDropdownStates((prevStates) => ({
+      ...prevStates,
+      [newSlug]: !prevStates[newSlug],
+    }));
 
-    if (!isActive) {
-      setDropdownStates(category.slug) = true;
-      activeCategory.value = category.slug;
-    } else {
-      activeCategory.value = null;
-    }
-
-    const currentElement = document.getElementById(category.slug);
-
-    if (currentElement) {
-      const rect = currentElement.getBoundingClientRect();
-      parentLeftPosition.value = rect.left;
-    }
+    // Close other dropdowns at the same level and deeper levels
+    Object.keys(dropdownStates).forEach((key) => {
+      if (key !== newSlug && key.split("/").length >= level + 1) {
+        setDropdownStates((prevStates) => ({
+          ...prevStates,
+          [key]: false,
+        }));
+      }
+    });
   };
+
+  const isDropdownOpen = (slug: string) =>
+    !!dropdownStates[`${parentCategory.slug || ""}/${slug}`];
+
   return (
-    <div className="submenu absolute bg-white text-black py-2 z-10 min-w-[200px] min-h-[400px]">
+    <div
+      ref={dropdownRef}
+      style={{ paddingLeft: parentLeftPosition }}
+      className="submenu absolute bg-white text-black py-2 z-10 min-w-[200px] min-h-[400px]"
+    >
       <div className="flex justify-between items-center">
         <a
-          href="'/category/' + props.parentSlug"
+          href={`/category/${parentCategory.slug}`}
           className="w-full block text-left hover:underline focus:outline-none py-3 uppercase font-bold min-w-[200px] cursor-pointer"
-        ></a>
+        >
+          {parentCategory.title}
+        </a>
         <i className="fas fa-chevron-right ml-1 pe-4"></i>
       </div>
 
-      <ul className="space-y-2 mt-3 w-full list-none">
-        <li
-          v-for="category in categories"
-          key="category.slug"
-          className="group"
-        >
-          <div className="flex justify-between items-center">
-            <button className="w-full text-left hover:underline focus:outline-none flex justify-between py-1 uppercase pe-8"></button>
-            <i className="fas fa-chevron-right ml-1 pe-4"></i>
-          </div>
+      <hr className="border-1 border-gray-775 w-[92.5%]"></hr>
 
-          <NavigationSubMenus className="left-full top-0 !bg-gray-550" />
-        </li>
+      <ul className="space-y-2 mt-3 w-full list-none">
+        {categories.map((category) => (
+          <li key={category.slug} className="group">
+            <div className="flex justify-between items-center">
+              <button
+                onClick={() => toggleDropdown(category)}
+                onMouseEnter={() => toggleDropdown(category)}
+                className={`w-full text-left hover:underline focus:outline-none flex justify-between py-1 uppercase pe-8 ${
+                  isDropdownOpen(category.slug) ? "font-bold" : "font-medium"
+                }`}
+              >
+                {category.display_title}
+              </button>
+              {category.children.length && (
+                <i className="fas fa-chevron-right ml-1 pe-4"></i>
+              )}
+            </div>
+
+            {isDropdownOpen(category.slug) && (
+              <NavigationSubMenus
+                categories={category.children}
+                parentCategory={category}
+                level={level + 1}
+                parentLeftPosition={`${parentLeftPosition}px`}
+              />
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );
-};
-
-export default NavigationSubMenus;
+}

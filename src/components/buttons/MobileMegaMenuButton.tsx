@@ -13,7 +13,7 @@ import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { AuthButton } from "./AuthButton";
 import { CartButton } from "./CartButton";
 import { navs } from "@/lib/dummy/nav";
-import { Nav } from "@/lib/types/nav";
+import { Nav } from "@/lib/types/Nav";
 
 const addSlugsToNavs = (navs: Nav[], parentSlug: string = ""): Nav[] => {
   return navs.map((nav) => {
