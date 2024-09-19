@@ -1,5 +1,4 @@
 import { Category } from "../types/Category";
-import { Nav } from "../types/Nav";
 
 export const navs: Category[] = [
   {

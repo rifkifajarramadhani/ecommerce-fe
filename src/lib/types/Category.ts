@@ -14,7 +14,7 @@ export type LadingPage = {
 };
 
 export type Category = {
-  id: number;
+  id: number | string;
   parent_id?: number | null;
   lft?: number | null;
   rght?: number | null;
@@ -22,17 +22,17 @@ export type Category = {
   title: string;
   slug: string;
   description?: string | null;
-  has_landing_page: boolean;
-  show_on_menu: boolean;
+  has_landing_page?: boolean;
+  show_on_menu?: boolean;
   sort?: number | null;
   created?: Date | string | null;
   modified?: Date | string | null;
   deleted?: Date | string | null;
   parent_category?: Category | null;
   child_categories?: Category[] | null;
-  children: Category[];
+  children?: Category[];
   products?: Product[] | null;
   landing_page?: LadingPage | null;
-  display_title: string;
-  path: string | null;
+  display_title?: string;
+  path?: string | null;
 };

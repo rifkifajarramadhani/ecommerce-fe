@@ -13,14 +13,17 @@ import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { AuthButton } from "./AuthButton";
 import { CartButton } from "./CartButton";
 import { navs } from "@/lib/dummy/nav";
-import { Nav } from "@/lib/types/Nav";
+import { Category } from "@/lib/types/Category";
 
-const addSlugsToNavs = (navs: Nav[], parentSlug: string = ""): Nav[] => {
+const addSlugsToNavs = (
+  navs: Category[],
+  parentSlug: string = ""
+): Category[] => {
   return navs.map((nav) => {
     const currentSlug = parentSlug
       ? `category/${parentSlug}/${nav.slug}`
       : `${nav.slug}`;
-    const newNav: Nav = { ...nav, slug: currentSlug };
+    const newNav: Category = { ...nav, slug: currentSlug };
     if (nav.children) {
       newNav.children = addSlugsToNavs(nav.children, currentSlug);
     }
@@ -30,7 +33,7 @@ const addSlugsToNavs = (navs: Nav[], parentSlug: string = ""): Nav[] => {
 
 export const MobileMegaMenuButton = () => {
   const [open, setOpen] = useState(false);
-  const [navigationStack, setNavigationStack] = useState<Nav[][]>([
+  const [navigationStack, setNavigationStack] = useState<Category[][]>([
     addSlugsToNavs(navs),
   ]);
   const [currentLevel, setCurrentLevel] = useState(0);
@@ -39,7 +42,7 @@ export const MobileMegaMenuButton = () => {
   const navClass =
     "w-full justify-between btn-hover-light text-left py-8 px-0 uppercase border-b border-gray-200 text-xl";
 
-  const navigateForward = (nav: Nav) => {
+  const navigateForward = (nav: Category) => {
     if (nav.children && nav.children.length > 0) {
       setNavigationStack([
         ...navigationStack.slice(0, currentLevel + 1),

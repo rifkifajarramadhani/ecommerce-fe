@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Category } from "@/lib/types/Category";
 
 interface NavigationSubMenusProps {
-  categories: Category[];
+  categories: Category[] | undefined;
   parentCategory: Category;
   level: number;
   parentLeftPosition: string;
@@ -19,7 +19,7 @@ export default function NavigationSubMenus(props: NavigationSubMenusProps) {
   const toggleDropdown = (category: Category) => {
     const newSlug = `${parentCategory.slug || ""}/${category.slug}`;
 
-    if (!category.children.length) {
+    if (!category.children?.length) {
       window.location.href = `/category/${newSlug}`;
       return;
     }
@@ -62,33 +62,34 @@ export default function NavigationSubMenus(props: NavigationSubMenusProps) {
       <hr className="border-1 border-gray-775 w-[92.5%]"></hr>
 
       <ul className="space-y-2 mt-3 w-full list-none">
-        {categories.map((category) => (
-          <li key={category.slug} className="group">
-            <div className="flex justify-between items-center">
-              <button
-                onClick={() => toggleDropdown(category)}
-                onMouseEnter={() => toggleDropdown(category)}
-                className={`w-full text-left hover:underline focus:outline-none flex justify-between py-1 uppercase pe-8 ${
-                  isDropdownOpen(category.slug) ? "font-bold" : "font-medium"
-                }`}
-              >
-                {category.display_title}
-              </button>
-              {category.children.length && (
-                <i className="fas fa-chevron-right ml-1 pe-4"></i>
-              )}
-            </div>
+        {categories &&
+          categories.map((category) => (
+            <li key={category.slug} className="group">
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={() => toggleDropdown(category)}
+                  onMouseEnter={() => toggleDropdown(category)}
+                  className={`w-full text-left hover:underline focus:outline-none flex justify-between py-1 uppercase pe-8 ${
+                    isDropdownOpen(category.slug) ? "font-bold" : "font-medium"
+                  }`}
+                >
+                  {category.display_title}
+                </button>
+                {category.children?.length && (
+                  <i className="fas fa-chevron-right ml-1 pe-4"></i>
+                )}
+              </div>
 
-            {isDropdownOpen(category.slug) && (
-              <NavigationSubMenus
-                categories={category.children}
-                parentCategory={category}
-                level={level + 1}
-                parentLeftPosition={`${parentLeftPosition}px`}
-              />
-            )}
-          </li>
-        ))}
+              {isDropdownOpen(category.slug) && (
+                <NavigationSubMenus
+                  categories={category.children}
+                  parentCategory={category}
+                  level={level + 1}
+                  parentLeftPosition={`${parentLeftPosition}px`}
+                />
+              )}
+            </li>
+          ))}
       </ul>
     </div>
   );

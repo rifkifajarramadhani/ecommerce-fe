@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { navs } from "@/lib/dummy/nav";
-import { Nav } from "@/lib/types/Nav";
 import NavigationSubMenus from "./NavigationSubMenus"; // Assuming SubMenu component
 import { Category } from "@/lib/types/Category";
 
