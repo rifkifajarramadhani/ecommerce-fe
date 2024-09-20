@@ -1,17 +1,6 @@
 import { AuthButton } from "./buttons/AuthButton";
 import { CartButton } from "./buttons/CartButton";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
 import { MobileMegaMenuButton } from "./buttons/MobileMegaMenuButton";
-import { navs } from "@/lib/dummy/nav";
 import { NavigationMenus } from "./header/NavigationMenus";
 
 export const Header = () => {
