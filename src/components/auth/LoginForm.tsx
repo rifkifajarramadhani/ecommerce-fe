@@ -51,7 +51,7 @@ export const LoginForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex justify-between">
-                Password <a href="">hehe</a>
+                Password <a href="">Forgot Password?</a>
               </FormLabel>
               <FormControl>
                 <Input type="password" placeholder="Password" {...field} />

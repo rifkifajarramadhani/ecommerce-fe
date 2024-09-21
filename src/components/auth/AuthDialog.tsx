@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { LoginForm } from "./LoginForm";
-import { AuthButton } from "../buttons/AuthButton";
+import { User } from "lucide-react";
 
 export const AuthDialog = () => {
   const titles = {
@@ -20,10 +20,11 @@ export const AuthDialog = () => {
   };
   const [title, setTitle] = useState<string>(titles["login"]);
   const [formState, setFormState] = useState<string>("login");
+
   return (
     <Dialog>
-      <DialogTrigger className="flex items-center space-x-3 text-white">
-        <AuthButton /> <span className="hidden lg:block">Login</span>
+      <DialogTrigger className="flex items-center space-x-3 text-white px-4">
+        <User /> <span className="hidden lg:block">Login</span>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
