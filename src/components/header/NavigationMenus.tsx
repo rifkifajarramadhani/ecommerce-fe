@@ -10,15 +10,16 @@ export function NavigationMenus() {
   const parentLeftPositions = useRef<number>(0); // Store left positions for submenus
 
   const toggleDropdown = (nav: Category) => {
+    console.log(nav.children?.length);
+    if (nav.children?.length === 0) {
+      // Handle non-dropdown navigation items (optional)
+      return;
+    }
+
     setDropdownStates((prevStates) => ({
       ...prevStates,
       [nav.slug]: !prevStates[nav.slug],
     }));
-
-    if (!nav.children) {
-      // Handle non-dropdown navigation items (optional)
-      return;
-    }
 
     const currentElement = document.getElementById(nav.slug);
     if (currentElement) {
@@ -39,7 +40,10 @@ export function NavigationMenus() {
   }, []);
 
   return (
-    <nav id="menu-items" className="w-full bg-white text-black">
+    <nav
+      id="menu-items"
+      className="w-full bg-white text-black shadow-md relative"
+    >
       <div className="container mx-auto hidden lg:flex w-full justify-between px-6 font-medium">
         <ul className="flex items-center justify-between lg-1/2:space-x-6 w-full list-none">
           {navs.map((nav: Category) => (
@@ -58,7 +62,7 @@ export function NavigationMenus() {
                   parentCategory={nav} // Assuming `parentCategory` prop in SubMenu
                   categories={nav.children} // Assuming `categories` prop in SubMenu
                   level={1}
-                  parentLeftPosition={`${parentLeftPositions.current}px`} // Position submenus correctly
+                  parentLeftPosition={parentLeftPositions.current} // Position submenus correctly
                 />
               )}
             </li>
