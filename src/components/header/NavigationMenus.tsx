@@ -39,8 +39,8 @@ export function NavigationMenus() {
   }, []);
 
   return (
-    <nav id="menu-items" className="bg-white text-black">
-      <div className="container mx-auto flex w-full justify-between px-6 font-medium">
+    <nav id="menu-items" className="w-full bg-white text-black">
+      <div className="container mx-auto hidden lg:flex w-full justify-between px-6 font-medium">
         <ul className="flex items-center justify-between lg-1/2:space-x-6 w-full list-none">
           {navs.map((nav: Category) => (
             <li key={nav.slug} className="group px-6 py-2">

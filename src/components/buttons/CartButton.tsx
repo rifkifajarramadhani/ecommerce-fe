@@ -11,8 +11,8 @@ export function CartButton(props: ButtonProps) {
         <ShoppingCart />
       </div>
 
-      <div className="hidden lg:flex">
-        <ShoppingCart className="mr-2 h-4 w-4" /> 3 |
+      <div className="hidden lg:flex items-center">
+        <ShoppingCart className="mr-2 h-4 w-4" /> 3 | $100
       </div>
     </Button>
   );

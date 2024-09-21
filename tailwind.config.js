@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  corePlugins: {
+    container: false,
+  },
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -56,6 +59,44 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    ({ addComponents, theme }) => {
+      addComponents({
+        ".container": {
+          marginLeft: "auto",
+          marginRight: "auto",
+
+          paddingLeft: theme("spacing.2"),
+          paddingRight: theme("spacing.2"),
+
+          maxWidth: theme("screens.sm"),
+
+          "@screen sm": {
+            paddingLeft: theme("spacing.4"),
+            paddingLight: theme("spacing.4"),
+
+            maxWidth: theme("screens.sm"),
+          },
+          "@screen md": {
+            maxWidth: theme("screens.md"),
+          },
+          "@screen lg": {
+            maxWidth: theme("screens.lg"),
+          },
+          "@screen xl": {
+            maxWidth: theme("screens.xl"),
+          },
+        },
+        ".drag-none": {
+          "-webkit-user-drag": "none",
+          "-khtml-user-drag": "none",
+          "-moz-user-drag": "none",
+          "-o-user-drag": "none",
+          "user-drag": "none",
+        },
+      });
+    },
+  ],
 };
 
