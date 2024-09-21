@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { AuthButton } from "./buttons/AuthButton";
 import { CartButton } from "./buttons/CartButton";
 import { MobileMegaMenuButton } from "./buttons/MobileMegaMenuButton";
 import { NavigationMenus } from "./header/NavigationMenus";
@@ -22,8 +21,8 @@ export const Header = () => {
           </Link>
 
           {/* BUTTONS */}
-          <div>
-            <AuthButton className="text-white" />
+          <div className="flex justify-center items-center">
+            <AuthDialog />
             <CartButton className="text-white" />
             <MobileMegaMenuButton />
           </div>

@@ -10,10 +10,10 @@ import {
 } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
-import { AuthButton } from "./AuthButton";
 import { CartButton } from "./CartButton";
 import { navs } from "@/lib/dummy/nav";
 import { Category } from "@/lib/types/Category";
+import { AuthDialog } from "../auth/AuthDialog";
 
 const addSlugsToNavs = (
   navs: Category[],
@@ -81,7 +81,7 @@ export const MobileMegaMenuButton = () => {
               />
             </picture>
             <div className="flex items-center">
-              <AuthButton className="text-black hover:text-white" />
+              <AuthDialog />
               <CartButton className="text-black hover:text-white" />
               <DrawerClose asChild>
                 <Button className="bg-transparent border-none shadow-none text-black hover:text-white">

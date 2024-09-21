@@ -5,8 +5,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { User } from "lucide-react";
 import { useState } from "react";
+import { LoginForm } from "./LoginForm";
+import { AuthButton } from "../buttons/AuthButton";
 
 export const AuthDialog = () => {
   const titles = {
@@ -21,13 +22,15 @@ export const AuthDialog = () => {
   const [formState, setFormState] = useState<string>("login");
   return (
     <Dialog>
-      <DialogTrigger className="flex space-x-3">
-        <User /> <span>Login</span>
+      <DialogTrigger className="flex items-center space-x-3 text-white">
+        <AuthButton /> <span className="hidden lg:block">Login</span>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
+
+        {formState == "login" && <LoginForm />}
       </DialogContent>
     </Dialog>
   );
