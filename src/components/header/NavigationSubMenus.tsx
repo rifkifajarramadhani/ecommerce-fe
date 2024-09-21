@@ -6,12 +6,19 @@ type NavigationSubMenusProps = {
   categories: Category[] | undefined;
   parentCategory: Category;
   level: number;
-  parentLeftPosition: number;
+  parentLeftPosition?: number;
+  addedClassName?: string;
 };
 
 export default function NavigationSubMenus(props: NavigationSubMenusProps) {
-  const { categories, parentCategory, level, parentLeftPosition } = props;
-  console.log(parentLeftPosition);
+  const {
+    categories,
+    parentCategory,
+    level,
+    parentLeftPosition,
+    addedClassName,
+  } = props;
+
   const [dropdownStates, setDropdownStates] = useState<Record<string, boolean>>(
     {}
   );
@@ -48,7 +55,10 @@ export default function NavigationSubMenus(props: NavigationSubMenusProps) {
     <div
       ref={dropdownRef}
       style={{ paddingLeft: `${parentLeftPosition}px` }}
-      className="absolute top-10 left-0 bg-[#F0EEEC] text-black py-2 z-10 min-w-[200px] min-h-[400px]"
+      className={
+        "absolute bg-[#F0EEEC] text-black py-2 z-10 min-w-[200px] min-h-[400px] " +
+        (addedClassName ? ` ${addedClassName}` : "top-10 left-0")
+      }
     >
       <div className="flex justify-between items-center">
         <a
@@ -84,7 +94,7 @@ export default function NavigationSubMenus(props: NavigationSubMenusProps) {
                   categories={category.children}
                   parentCategory={category}
                   level={level + 1}
-                  parentLeftPosition={parentLeftPosition}
+                  addedClassName="left-full top-0"
                 />
               )}
             </li>
