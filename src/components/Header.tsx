@@ -3,6 +3,7 @@ import { AuthButton } from "./buttons/AuthButton";
 import { CartButton } from "./buttons/CartButton";
 import { MobileMegaMenuButton } from "./buttons/MobileMegaMenuButton";
 import { NavigationMenus } from "./header/NavigationMenus";
+import { AuthDialog } from "./auth/AuthDialog";
 
 export const Header = () => {
   return (
@@ -58,7 +59,7 @@ export const Header = () => {
 
               <div>Track order layout</div>
 
-              <div>Auth</div>
+              <AuthDialog />
 
               <div>Smartbuy points</div>
             </div>
