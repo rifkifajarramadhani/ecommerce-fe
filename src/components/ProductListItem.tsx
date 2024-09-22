@@ -1,30 +1,6 @@
+import { Product } from "@/lib/types/Product";
 import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-
-type Product = {
-  availabilityStatus: string;
-  brand: string;
-  category: "products";
-  description: string;
-  dimensions: Object;
-  discountPercentage: 11.85;
-  id: 121;
-  images: string[];
-  meta: Object;
-  minimumOrderQuantity: number;
-  price: number;
-  rating: number;
-  returnPolicy: string;
-  reviews: string[];
-  shippingInformation: string;
-  sku: string;
-  stock: number;
-  tags: string[];
-  thumbnail: string;
-  title: string;
-  warrantyInformation: string;
-  weight: string;
-};
 
 type ProductListItemProps = {
   product: Product;
@@ -35,7 +11,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
 
   return (
     <Link
-      to={"#"}
+      to={`/products/${product.id}`}
       className="relative w-full h-[390px] border border-gray-825 p-3 flex flex-col justify-start overflow-hidden"
       key={product.id}
     >

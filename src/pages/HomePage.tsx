@@ -66,7 +66,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center relative max-h-[400px] lg:h-[400px] overflow-hidden mt-2 mb-8">
+      <div className="flex justify-center items-center relative max-h-[400px] lg:h-[400px] overflow-hidden mb-8">
         <picture>
           <img
             src="https://utfs.io/f/KIQHcaf9YatfKATDW9of9Yatfox2b1yzSAn5863rpqTMgIWG"

@@ -1,0 +1,24 @@
+export type Product = {
+  availabilityStatus: string;
+  brand: string;
+  category: "products";
+  description: string;
+  dimensions: Object;
+  discountPercentage: 11.85;
+  id: 121;
+  images: string[];
+  meta: Object;
+  minimumOrderQuantity: number;
+  price: number;
+  rating: number;
+  returnPolicy: string;
+  reviews: string[];
+  shippingInformation: string;
+  sku: string;
+  stock: number;
+  tags: string[];
+  thumbnail: string;
+  title: string;
+  warrantyInformation: string;
+  weight: string;
+};
