@@ -22,7 +22,11 @@ export const Header = () => {
 
           {/* BUTTONS */}
           <div className="flex justify-center items-center">
-            <AuthDialog />
+            <AuthDialog
+              customClass={
+                "inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-white hover:bg-primary/90 px-4 py-2"
+              }
+            />
             <CartButton className="text-white" />
             <MobileMegaMenuButton />
           </div>

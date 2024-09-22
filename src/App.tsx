@@ -10,7 +10,7 @@ const App = () => {
     <>
       <Header />
 
-      <main className="container mx-auto">
+      <main className="container mx-auto pb-12">
         <Routes>
           <Route path="/" Component={HomePage} />
           <Route path="/contact-us" Component={ContactUsPage} />

@@ -74,7 +74,7 @@ export default {
 
           "@screen sm": {
             paddingLeft: theme("spacing.4"),
-            paddingLight: theme("spacing.4"),
+            paddingRight: theme("spacing.4"),
 
             maxWidth: theme("screens.sm"),
           },

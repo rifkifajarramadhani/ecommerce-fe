@@ -9,7 +9,12 @@ import { useState } from "react";
 import { LoginForm } from "./LoginForm";
 import { User } from "lucide-react";
 
-export const AuthDialog = () => {
+type AuthDialogProps = {
+  customClass?: string;
+};
+
+export const AuthDialog = (props: AuthDialogProps) => {
+  const { customClass } = props;
   const titles = {
     login: "Login or Register",
     register: "Create an account",
@@ -23,10 +28,13 @@ export const AuthDialog = () => {
 
   return (
     <Dialog>
-      <DialogTrigger className="flex items-center space-x-3 text-white px-4">
-        <User /> <span className="hidden lg:block">Login</span>
+      <DialogTrigger className="flex items-center space-x-3 text-white">
+        <span className={customClass}>
+          <User />
+        </span>
+        <span className="hidden lg:block">Login</span>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-4/5">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>

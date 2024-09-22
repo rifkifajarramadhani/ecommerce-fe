@@ -81,7 +81,11 @@ export const MobileMegaMenuButton = () => {
               />
             </picture>
             <div className="flex items-center">
-              <AuthDialog />
+              <AuthDialog
+                customClass={
+                  "inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 text-black hover:text-white hover:bg-primary/90 px-4 py-2"
+                }
+              />
               <CartButton className="text-black hover:text-white" />
               <DrawerClose asChild>
                 <Button className="bg-transparent border-none shadow-none text-black hover:text-white">
