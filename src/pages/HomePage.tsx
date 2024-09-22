@@ -49,20 +49,18 @@ const HomePage = () => {
           />
         </picture>
 
-        <div className="absolute bg-black top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-10 md:top-0 md:translate-x-0 md:translate-y-0 h-[300px] lg:h-[300px] md:max-w-3xl md:mt-[50px] max-w-sm lg:max-w-4xl w-full flex flex-col text-white z-[100] py-10 lg:py-8 px-10">
-          <h1 className="text-center md:text-left mb-2 lg:text-[64px] leading-[1em] text-7xl md:text-[52px] uppercase">
+        <div className="absolute bg-black top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-10 md:top-0 md:translate-x-0 md:translate-y-0 h-[300px] lg:h-[300px] md:max-w-3xl md:mt-[50px] max-w-sm lg:max-w-4xl w-full flex flex-col justify-between text-white z-[100] py-10 lg:py-8 px-10">
+          <h1 className="text-center md:text-left mb-2 lg:text-[64px] leading-[1em] text-7xl md:text-[52px] uppercase font-bold">
             Lorem, ipsum.
           </h1>
 
           <p className="text-center md:text-left text-2xl md:text-3xl font-sans-condensed">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo earum
-            ipsa sunt in, quam cum incidunt ratione quas reprehenderit
-            distinctio sint repellat, sequi velit impedit ut recusandae, nam
-            architecto iste?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel totam
+            sapiente dignissimos deleniti nostrum nihil.
           </p>
 
           <Link to={""}>
-            <Button>Shop All</Button>
+            <Button variant={"whiteOnRed"}>Shop All</Button>
           </Link>
         </div>
       </div>

@@ -29,6 +29,7 @@ export const LoginForm = () => {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -45,6 +46,7 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="password"
@@ -60,7 +62,8 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Button variant={"black"} type="submit">
+
+        <Button variant={"blackOnRed"} type="submit">
           Submit
         </Button>
       </form>

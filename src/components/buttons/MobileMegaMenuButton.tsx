@@ -80,6 +80,7 @@ export const MobileMegaMenuButton = () => {
                 alt="logo"
               />
             </picture>
+
             <div className="flex items-center">
               <AuthDialog
                 customClass={
