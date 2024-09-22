@@ -1,42 +1,34 @@
-import { useState, useRef, useEffect } from "react";
-import { navs } from "@/lib/dummy/nav";
-import NavigationSubMenus from "./NavigationSubMenus"; // Assuming SubMenu component
+import { useState, useEffect } from "react";
 import { Category } from "@/lib/types/Category";
+import { axiosInstance } from "@/lib/request/axios";
+import { Link } from "react-router-dom";
 
 export function NavigationMenus() {
-  const [dropdownStates, setDropdownStates] = useState<Record<string, boolean>>(
-    {}
-  ); // Track open/closed states
-  const parentLeftPositions = useRef<number>(0); // Store left positions for submenus
+  const [categories, setCategories] = useState<Category[]>();
 
-  const toggleDropdown = (nav: Category) => {
-    console.log(nav.children?.length);
-    if (nav.children?.length === 0) {
-      // Handle non-dropdown navigation items (optional)
-      return;
-    }
+  const fetchCategories = async () => {
+    try {
+      const response = await axiosInstance.get("/products/categories");
 
-    setDropdownStates((prevStates) => ({
-      ...prevStates,
-      [nav.slug]: !prevStates[nav.slug],
-    }));
+      const categoriesArr = [
+        "laptops",
+        "mobile-accesories",
+        "smartphones",
+        "tablets",
+        "mens-watches",
+        "womens-watches",
+      ];
+      const categoryNavs = response.data.filter((category: Category) =>
+        categoriesArr.includes(category.slug)
+      );
 
-    const currentElement = document.getElementById(nav.slug);
-    if (currentElement) {
-      parentLeftPositions.current = currentElement.getBoundingClientRect().left;
-    }
-  };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    const nav = document.getElementById("menu-items");
-    if (nav && !nav.contains(event.target as Node)) {
-      setDropdownStates({});
+      setCategories(categoryNavs);
+    } catch (err) {
+      console.log(err);
     }
   };
-
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    fetchCategories();
   }, []);
 
   return (
@@ -45,26 +37,12 @@ export function NavigationMenus() {
       className="w-full bg-white text-black shadow-md relative"
     >
       <div className="container mx-auto hidden lg:flex w-full justify-between px-6 font-medium">
-        <ul className="flex items-center justify-between lg-1/2:space-x-6 w-full list-none">
-          {navs.map((nav: Category) => (
-            <li key={nav.slug} className="group px-6 py-2">
-              <button
-                className="focus:outline-none uppercase"
-                id={nav.slug}
-                onClick={() => toggleDropdown(nav)}
-              >
-                {nav.display_title}
-                {nav.children && <i className="fas fa-chevron-down ml-1"></i>}
-              </button>
-
-              {dropdownStates[nav.slug] && nav.children && (
-                <NavigationSubMenus
-                  parentCategory={nav} // Assuming `parentCategory` prop in SubMenu
-                  categories={nav.children} // Assuming `categories` prop in SubMenu
-                  level={1}
-                  parentLeftPosition={parentLeftPositions.current} // Position submenus correctly
-                />
-              )}
+        <ul className="flex flex-wrap whitespace-nowrap items-center justify-between lg-1/2:space-x-6 w-full list-none">
+          {categories?.map((category: Category) => (
+            <li key={category.slug} className="group px-6 py-2">
+              <Link to={`products/category/${category.slug}`}>
+                {category.name}
+              </Link>
             </li>
           ))}
         </ul>

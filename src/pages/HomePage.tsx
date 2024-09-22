@@ -49,7 +49,7 @@ const HomePage = () => {
           />
         </picture>
 
-        <div className="absolute bg-black top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-10 md:top-0 md:translate-x-0 md:translate-y-0 h-[300px] lg:h-[300px] md:max-w-3xl md:mt-[50px] max-w-sm lg:max-w-4xl w-full flex flex-col justify-between text-white z-[100] py-10 lg:py-8 px-10">
+        <div className="absolute bg-black top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-10 md:top-0 md:translate-x-0 md:translate-y-0 h-[300px] lg:h-[300px] md:max-w-3xl md:mt-[50px] max-w-sm lg:max-w-4xl w-full flex flex-col justify-between text-white z-20 py-10 lg:py-8 px-10">
           <h1 className="text-center md:text-left mb-2 lg:text-[64px] leading-[1em] text-7xl md:text-[52px] uppercase font-bold">
             Lorem, ipsum.
           </h1>

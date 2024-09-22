@@ -6,7 +6,7 @@ import { AuthDialog } from "./auth/AuthDialog";
 
 export const Header = () => {
   return (
-    <header className="w-full h-32 flex flex-col items-center bg-[#101010] lg:bg-black">
+    <header className="w-full h-full flex flex-col items-center bg-[#101010] lg:bg-black">
       <div className="flex w-full h-32">
         {/* MOBILE */}
         <div className="w-full flex lg:hidden justify-between items-center px-4">

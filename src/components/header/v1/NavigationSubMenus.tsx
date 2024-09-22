@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Category } from "@/lib/types/Category";
+import { Category } from "@/lib/types/v1/Category";
 import { ChevronRight } from "lucide-react";
 
 type NavigationSubMenusProps = {

@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import { CartButton } from "./CartButton";
 import { navs } from "@/lib/dummy/nav";
-import { Category } from "@/lib/types/Category";
+import { Category } from "@/lib/types/v1/Category";
 import { AuthDialog } from "../auth/AuthDialog";
 
 const addSlugsToNavs = (
