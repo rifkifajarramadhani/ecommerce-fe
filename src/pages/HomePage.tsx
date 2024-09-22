@@ -11,8 +11,9 @@ import { Button } from "@/components/ui/button";
 
 const HomePage = () => {
   const [smartphones, setSmartphones] = useState<any>([]);
+  const [laptops, setLaptops] = useState<any>([]);
 
-  const fetchProducts = async () => {
+  const fetchSmartphones = async () => {
     try {
       const response = await axiosInstance.get(
         `/products/category/smartphones?limit=5`
@@ -24,19 +25,43 @@ const HomePage = () => {
     }
   };
 
-  const productList = smartphones.map((smartphone: any) => {
+  const fetchLaptops = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/products/category/laptops?limit=5`
+      );
+
+      setLaptops(response.data.products);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const smartphonesList = smartphones.map((product: any) => {
     return (
       <CarouselItem
         className="basis-1/2 md:basis-1/3 lg:basis-1/5"
-        key={smartphone.id}
+        key={product.id}
       >
-        <ProductListItem smartphone={smartphone} />
+        <ProductListItem product={product} />
+      </CarouselItem>
+    );
+  });
+
+  const laptopsList = laptops.map((product: any) => {
+    return (
+      <CarouselItem
+        className="basis-1/2 md:basis-1/3 lg:basis-1/5"
+        key={product.id}
+      >
+        <ProductListItem product={product} />
       </CarouselItem>
     );
   });
 
   useEffect(() => {
-    fetchProducts();
+    fetchSmartphones();
+    fetchLaptops();
   }, []);
 
   return (
@@ -64,6 +89,7 @@ const HomePage = () => {
           </Link>
         </div>
       </div>
+
       <div className="smartphones flex flex-col uppercase mb-8">
         <div className="flex space-x-5">
           <h1 className="font-bold">Smartphones</h1>
@@ -71,7 +97,40 @@ const HomePage = () => {
         </div>
 
         <Carousel>
-          <CarouselContent>{productList}</CarouselContent>
+          <CarouselContent>{smartphonesList}</CarouselContent>
+        </Carousel>
+      </div>
+
+      <div className="flex mb-10">
+        <div className="bg-[#ED0F00] bg-no-repeat bg-cover md:bg-none w-full md:w-5/12 py-16 md:py-0">
+          <div className="flex flex-col justify-center items-center bg-gray-900 md:bg-black w-full h-[350px] text-white text-center md:text-left px-8 lg:px-12">
+            <p className="font-semibold uppercase text-[40px] leading-[40px] mb-3">
+              Get much more with the new{" "}
+              <span className="text-[#ED0F00]">Smartbuy</span>
+            </p>
+
+            <p className="font-sans-condensed text-xl leading-10 mb-3 w-full">
+              View your points balances and exclusive offers on the SmartBuy
+              customer portal.
+            </p>
+
+            <a href="#" className="btn-smartbuy">
+              View your <span>Smartbuy</span> account here
+            </a>
+          </div>
+        </div>
+
+        <div className="hidden md:flex bg-[#ED0F00] bg-no-repeat bg-cover w-7/12 h-[350px]"></div>
+      </div>
+
+      <div className="laptops flex flex-col uppercase mb-8">
+        <div className="flex space-x-5">
+          <h1 className="font-bold">Laptops</h1>
+          <Link to={"/products/category/laptops"}>Shop All</Link>
+        </div>
+
+        <Carousel>
+          <CarouselContent>{laptopsList}</CarouselContent>
         </Carousel>
       </div>
     </>

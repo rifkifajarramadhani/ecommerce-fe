@@ -67,4 +67,29 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .btn-smartbuy {
+    @apply
+      transition-all
+      bg-white
+      text-black
+      hover:bg-[#ED0F00]
+      hover:text-white
+      font-bold
+      p-4
+      uppercase
+      md:w-full
+      md:text-center
+  }
+
+  .btn-smartbuy > span {
+    @apply
+      transition-all
+      text-[#ED0F00]
+  }
+
+  .btn-smartbuy:hover > span {
+    @apply
+      text-black
+  }
 }

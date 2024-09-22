@@ -4,6 +4,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import ContactUsPage from "./pages/ContactUsPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { Join } from "./components/Join";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         </Routes>
       </main>
 
+      <Join />
       <Footer />
     </>
   );
