@@ -35,8 +35,8 @@ const ProductDetailPage = () => {
 
   const images = product?.images.map((image, i) => {
     return (
-      <CarouselItem className="max-h-[500px]" key={i}>
-        <img src={image} alt="h-full" />
+      <CarouselItem key={i}>
+        <img src={image} alt="" className="w-auto lg:max-h-[550px] mx-auto" />
       </CarouselItem>
     );
   });
